@@ -3,6 +3,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const userRouter = require('./routes/user.js');
 const dataRouter = require('./routes/data.js');
+const flash = require('connect-flash');
+
 
 require('dotenv').config();
 
@@ -17,10 +19,12 @@ connection.once('open', ()=> {
 })
 
 app.use(cors());
+app.use(flash());
+
 app.use(express.json());
 
-app.use('/user', userRouter);
-app.use('/data', dataRouter);
+app.use(userRouter);
+app.use(dataRouter);
 
 
  
